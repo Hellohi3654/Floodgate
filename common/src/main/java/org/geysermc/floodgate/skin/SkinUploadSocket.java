@@ -29,6 +29,8 @@ import static org.geysermc.floodgate.util.Constants.WEBSOCKET_URL;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import java.net.ConnectException;
 import java.net.URI;
 import lombok.Getter;
 import org.geysermc.floodgate.api.FloodgateApi;
@@ -103,7 +105,12 @@ final class SkinUploadSocket extends WebSocketClient {
             String xuid = message.get("xuid").getAsString();
             FloodgatePlayer player = api.getPlayer(Utils.getJavaUuid(xuid));
             if (player != null) {
-                applier.applySkin(player, message);
+                if (!message.get("success").getAsBoolean()) {
+                    logger.info("Failed to upload skin for {} ({})", xuid,
+                            player.getCorrectUsername());
+                    return;
+                }
+                applier.applySkin(player, message.getAsJsonObject("data"));
             }
         }
     }
@@ -131,6 +138,10 @@ final class SkinUploadSocket extends WebSocketClient {
 
     @Override
     public void onError(Exception exception) {
+        // skip can't connect exceptions and the syntax error in onClose because of that.
+        if (exception instanceof ConnectException || exception instanceof JsonSyntaxException) {
+            return;
+        }
         logger.error("Got an error", exception);
     }
 }

@@ -30,9 +30,9 @@ jobs:
           java-version: 1.8
       - name: (Hacky) method of compiling Geyser with Floodgate first #Thanks Jackson_57#4340 or https://github.com/jackson-57
         run: |
-          git clone -b floodgate-2.0-2 https://github.com/Hellohi3654/Geyser.git GeyserFloodgate
+          git clone https://github.com/Tim203/Geyser.git GeyserFloodgate
           cd GeyserFloodgate
-          mvn -B -U package -T 2C
+          mvn clean install -T 2C
           cd ..
       - name: Build with Maven
         run: mvn -B -U package -T 2C

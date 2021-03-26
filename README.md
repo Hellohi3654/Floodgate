@@ -1,5 +1,8 @@
 # Floodgate
 
+You can download the latest floodgate-2.0 builds here:
+https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/dev%252F2.0/
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/badge/icon)](https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/)
 [![Discord](https://img.shields.io/discord/613163671870242838.svg?color=%237289da&label=discord)](http://discord.geysermc.org/)
